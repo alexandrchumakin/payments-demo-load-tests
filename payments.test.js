@@ -3,7 +3,7 @@ import { check, sleep } from 'k6';
 import { randomString, randomItem } from 'https://jslib.k6.io/k6-utils/1.4.0/index.js';
 
 const SLEEP_DURATION = 0.01;
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'http://payments-app.com/';
 
 const params = {
     headers: {
