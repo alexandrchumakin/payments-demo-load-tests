@@ -3,7 +3,7 @@ import { check, sleep } from 'k6';
 import { randomString, randomItem } from 'https://jslib.k6.io/k6-utils/1.4.0/index.js';
 
 const SLEEP_DURATION = 0.01;
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'http://payments-demo-quarkus-app:80';
 
 const params = {
     headers: {
@@ -14,8 +14,8 @@ const params = {
 
 export const options = {
     stages: [
-        { duration: `10s`, target: 5 }, // simulate ramp-up of traffic from 1 to 10 users over 5 minutes.
-        { duration: `20s`, target: 5 }, // stay at 10 users for 10 minutes
+        { duration: `10s`, target: 5 }, // simulate ramp-up of traffic from 1 to 5 users over 10 seconds
+        { duration: `20s`, target: 5 }, // stay at 5 users for 20 seconds
         { duration: `10s`, target: 0 }, // ramp-down to 0 users
     ],
     thresholds: {
