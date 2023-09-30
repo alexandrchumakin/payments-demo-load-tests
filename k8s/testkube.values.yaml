@@ -12,11 +12,6 @@ testkube-api:
     hosts:
       - testkube-api.com
     tlsenabled: "false"
-#    tls:
-#      - hosts:
-#          - testkube-api.com
-#        secretName: testkube-cert-secret
-
 
 testkube-dashboard:
   ingress:
@@ -31,9 +26,4 @@ testkube-dashboard:
     hosts:
       - testkube-dashboard.com
     tlsenabled: "false"
-#    tls:
-#      - hosts:
-#          - testkube-dashboard.com
-#        secretName: testkube-cert-secret
-
   apiServerEndpoint: "testkube-api.com/results"
