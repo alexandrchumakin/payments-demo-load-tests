@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k6-grafana-ingress
+  namespace: default
+spec:
+  rules:
+    - host: grafana-local.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: testkube-k6-grafana
+                port:
+                  number: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k6-influxdb-ingress
+  namespace: default
+spec:
+  rules:
+    - host: influxdb-local.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: testkube-k6-influxdb
+                port:
+                  number: 8086

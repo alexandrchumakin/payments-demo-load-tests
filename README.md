@@ -77,15 +77,19 @@ It's possible via deploying Testkube helm chart into existing kubernetes cluster
 ```shell
 chmod +x ./scripts/start-helm.sh && ./scripts/start-helm.sh
 ```
-- open [testkube dashboard](http://testkube-dashboard.com/sources)
-- create new source with any name, git URL `https://github.com/alexandrchumakin/payments-demo-load-tests.git` and leave credentials empty
-- add a new test [here](http://testkube-dashboard.com/tests) with a type `k6/script`
-- choose the source `Git source: payments-demo-load-tests`
-- fill in branch with `main`
-- fill in path with `payments.test.js`
-- click `Create` and then `Run now`
+- open [testkube dashboard](http://testkube-dashboard.com/tests)
+- navigate to [payments-test](http://testkube-dashboard.com/tests/payments-test)
+- click `Run now`
+- open running test execution to see real-time results
 
-## Removing chart
+#### Observing Grafana results
+- open [grafana](http://grafana-local.com/)
+- navigate to dashboards
+- select pre-configured `k6 Load Testing Results` dashboard
+- once you started tests, results will be automatically shown
+- you can change filters in top right corner to `Last 5 minutes` to better see the output
+
+### Removing chart
 ```shell
 chmod +x ./scripts/stop-helm.sh && ./scripts/stop-helm.sh 
 ```
