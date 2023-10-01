@@ -1,0 +1,40 @@
+apiVersion: tests.testkube.io/v1
+kind: TestSource
+metadata:
+  name: payments-demo-load-tests
+  namespace: default
+spec:
+  repository:
+    type: git
+    uri: https://github.com/alexandrchumakin/payments-demo-load-tests.git
+---
+apiVersion: tests.testkube.io/v3
+kind: Test
+metadata:
+  labels:
+    executor: k6-executor
+    test-type: k6-script
+  name: payments-test
+  namespace: default
+spec:
+  content:
+    repository:
+      branch: main
+      path: payments.test.js
+  executionRequest:
+    args:
+      - --out
+      - influxdb=http://testkube-k6-influxdb:8086/k6
+    variables:
+      BASE_URL:
+        name: BASE_URL
+        type: basic
+        value: http://payments-demo-quarkus-app:80
+        valueFrom: {}
+      TARGET_USERS:
+        name: TARGET_USERS
+        type: basic
+        value: "5"
+        valueFrom: {}
+  source: payments-demo-load-tests
+  type: k6/script
