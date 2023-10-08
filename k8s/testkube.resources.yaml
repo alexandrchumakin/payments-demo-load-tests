@@ -38,3 +38,20 @@ spec:
         valueFrom: {}
   source: payments-demo-load-tests
   type: k6/script
+---
+apiVersion: tests.testkube.io/v1
+kind: TestTrigger
+metadata:
+  name: app-deployed
+  namespace: default
+spec:
+  action: run
+  event: deployment-image-update
+  execution: test
+  resource: deployment
+  resourceSelector:
+    name: payments-demo-quarkus-app
+    namespace: default
+  testSelector:
+    name: payments-test
+    namespace: default
