@@ -45,7 +45,7 @@ function getCall(path) {
 
 export function setup() {
     const maxRetries = 20;
-    const retryInterval = 3000;
+    const retryInterval = 3;
     let retries = 0;
 
     while (retries < maxRetries) {
@@ -58,7 +58,7 @@ export function setup() {
         }
 
         retries++;
-        console.log(`Host not available. Retrying in ${retryInterval / 1000} seconds...`);
+        console.log(`Host not available. Retrying in ${retryInterval} seconds...`);
         sleep(retryInterval);
     }
 }
