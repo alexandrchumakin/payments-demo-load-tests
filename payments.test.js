@@ -15,9 +15,9 @@ const params = {
 
 export const options = {
     stages: [
-        { duration: `10s`, target: TARGET_USERS }, // simulate ramp-up of traffic from 1 to 5 users over 10 seconds
-        { duration: `20s`, target: TARGET_USERS }, // stay at 5 users for 20 seconds
-        { duration: `10s`, target: 0 }, // ramp-down to 0 users
+        { duration: `5s`, target: TARGET_USERS }, // simulate ramp-up of traffic from 1 to 5 users over 10 seconds
+        { duration: `10s`, target: TARGET_USERS }, // stay at 5 users for 20 seconds
+        { duration: `5s`, target: 0 }, // ramp-down to 0 users
     ],
     thresholds: {
         http_req_duration: ['p(90)<1000'], // 90% of requests must complete below 1s,
@@ -41,6 +41,26 @@ function getCall(path) {
 
     sleep(SLEEP_DURATION);
     return response.json();
+}
+
+export function setup() {
+    const maxRetries = 20;
+    const retryInterval = 3000;
+    let retries = 0;
+
+    while (retries < maxRetries) {
+        // Use the check function to make an HTTP request to the host
+        const res = http.get(`${BASE_URL}`);
+
+        if (res.status === 200) {
+            console.log(`Host is available after ${retries + 1} retries.`);
+            break;
+        }
+
+        retries++;
+        console.log(`Host not available. Retrying in ${retryInterval / 1000} seconds...`);
+        sleep(retryInterval);
+    }
 }
 
 export default function () {
@@ -77,5 +97,4 @@ export default function () {
         'delete payment returns status 204': (r) => r.status === 204
     });
     sleep(SLEEP_DURATION);
-
 }

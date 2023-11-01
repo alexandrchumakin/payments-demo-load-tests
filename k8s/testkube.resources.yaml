@@ -46,7 +46,7 @@ metadata:
   namespace: default
 spec:
   action: run
-  event: deployment-image-update
+  event: created
   execution: test
   resource: deployment
   resourceSelector:
