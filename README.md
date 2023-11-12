@@ -75,7 +75,9 @@ It's possible via deploying Testkube helm chart into existing kubernetes cluster
 ### Installing chart and running tests
 - run 
 ```shell
-chmod +x ./scripts/start-helm.sh && ./scripts/start-helm.sh
+chmod +x ./scripts/*
+./scripts/start-helm.sh # password will be asked for minukube tunnel - keep terminal opened
+./scripts/grafana-dashboard.sh # in a new terminal
 ```
 - open [testkube dashboard](http://testkube-dashboard.com/tests)
 - navigate to [payments-test](http://testkube-dashboard.com/tests/payments-test)
